@@ -4,7 +4,7 @@
 
 # [<p align=center>Multi-Hop Dense Text Retrieval (`MDR`)</p>](#p-aligncentermulti-hop-dense-text-retrieval-mdrp)
 
-`MDR` is a simple and generalized dense retrieval method which recursively retrieve supporting text passages for answering complex open-domain questions. The repo provides code and pretrained retrieval models that produce **state-of-the-art** retrieval performance on two multi-hop QA datasets (the [HotpotQA](https://hotpotqa.github.io) dataset and the multi-hop subset of the [FEVER fact extraction and verification dataset](https://fever.ai)). 
+`MDR` is a simple and generalized dense retrieval method which recursively retrieves supporting text passages for answering complex open-domain questions. The repo provides code and pretrained retrieval models that produce **state-of-the-art** retrieval performance on two multi-hop QA datasets (the [HotpotQA](https://hotpotqa.github.io) dataset and the multi-hop subset of the [FEVER fact extraction and verification dataset](https://fever.ai)). 
 
 More details about our approach are described in the following paper [Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)
 
@@ -29,7 +29,7 @@ pip install -r requirements.txt; python setup.py develop
 ```
 
 2. Download the necessary data files and pretrained retrieval models
-Simplified data files with `quesitons` and ground-truth `supporting passages`:
+Simplified data files with **quesitons** and ground-truth **supporting passages**:
 
 ```
 # save pretrained models to models/ and all processed hotpotQA into data/
