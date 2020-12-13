@@ -109,6 +109,33 @@ Processed train/validation data for retrieval training:
 * `${TRAIN_DATA_PATH}`: data/hotpot/hotpot_train_with_neg_v0.json
 * `${DEV_DATA_PATH}`: data/hotpot/hotpot_dev_with_neg_v0.json
 
+### Finetune the question encoder with frozen memory bank
+This step happens after the previous training stage and reuses the checkpoint
+point.
+
+
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python train_momentum.py \
+    --do_train \
+    --prefix {RUN_ID} \
+    --predict_batch_size 3000 \
+    --model_name roberta-base \
+    --train_batch_size 150 \
+    --learning_rate 1e-5 \
+    --fp16 \
+    --train_file {TRAIN_DATA_PATH} \
+    --predict_file {DEV_DATA_PATH}  \
+    --seed 16 \
+    --eval-period -1 \
+    --max_c_len 300 \
+    --max_q_len 70 \
+    --max_q_sp_len 350 \
+    --momentum \
+    --k 76800 \
+    --m 0.999 \
+    --temperature 1 \
+    --init-retriever {CHECKPOINT_PT} 
+
 ## Encoding the corpus for retrieval
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3 python scripts/get_embed.py \

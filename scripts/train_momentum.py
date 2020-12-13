@@ -1,47 +1,3 @@
-"""
-## Multihop Retrieval Training
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python train_momentum.py \
-    --do_train \
-    --prefix roberta_momentm_no_linked \
-    --predict_batch_size 3000 \
-    --model_name roberta-base \
-    --train_batch_size 150 \
-    --learning_rate 1e-5 \
-    --fp16 \
-    --train_file /private/home/xwhan/data/hotpot/hotpot_train_with_neg_v0_tfidf_only.json \
-    --predict_file /private/home/xwhan/data/hotpot/hotpot_val_with_neg_v0.json  \
-    --seed 16 \
-    --eval-period -1 \
-    --max_c_len 300 \
-    --max_q_len 70 \
-    --max_q_sp_len 350 \
-    --momentum \
-    --k 76800 \
-    --m 0.999 \
-    --temperature 1 \
-    --init-retriever logs/09-10-2020/roberta_no_linked_neg-seed16-bsz150-fp16True-lr2e-05-decay0.0-warm0.1-valbsz3000-sharedTrue-multi1-schemenone/checkpoint_best.pt
-
-# FEVER
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python train_momentum.py \
-    --do_train \
-    --prefix roberta_momentum_fever \
-    --predict_batch_size 3000 \
-    --model_name roberta-base \
-    --train_batch_size 96 \
-    --learning_rate 5e-6 \
-    --fp16 \
-    --train_file /private/home/xwhan/data/fever/retrieval/multi_train_tfidf.txt \
-    --predict_file /private/home/xwhan/data/fever/retrieval/multi_dev_tfidf.txt  \
-    --seed 16 \
-    --eval-period 50 \
-    --max_c_len 400 \
-    --max_q_len 45 \
-    --max_q_sp_len 450 \
-    --momentum \
-    --k 19200 \
-    --init-retriever logs/08-27-2020/fever-seed16-bsz96-fp16True-lr2e-05-decay0.0-warm0.1-valbsz3000-sharedTrue/checkpoint_best.pt
-
-"""
 import logging
 import os
 import random
@@ -57,12 +13,12 @@ from tqdm import tqdm
 from transformers import (AdamW, AutoConfig, AutoTokenizer,
                           get_linear_schedule_with_warmup)
 
-from config import train_args
-from criterions import (mhop_eval, mhop_loss)
-from data.mhop_dataset import MhopDataset, mhop_collate
-from models.mhop_retriever import RobertaMomentumRetriever
-from utils.utils import AverageMeter, move_to_cuda
-from data.fever_dataset import FeverDataset
+from mdr.retrieval.config import train_args
+from mdr.retrieval.criterions import (mhop_eval, mhop_loss)
+from mdr.retrieval.data.mhop_dataset import MhopDataset, mhop_collate
+from mdr.retrieval.models.mhop_retriever import RobertaMomentumRetriever
+from mdr.retrieval.utils.utils import AverageMeter, move_to_cuda
+from mdr.retrieval.data.fever_dataset import FeverDataset
 
 def main():
     args = train_args()
