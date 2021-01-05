@@ -3,11 +3,11 @@
 
 # Download pretrained models: pretrained retriever/reader models.
 
-wget ... 
+wget https://dl.fbaipublicfiles.com/mdpr
 unzip models.zip
 
 # indexed corpus; all kinds of HotpotQA data
 
-wget ...
+# wget ...
 unzip data.zip
 
