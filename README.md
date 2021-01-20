@@ -24,7 +24,7 @@ More details about our approach are described in the following paper [Answering 
 conda create --name MDR python=3.6
 conda activate MDR
 git clone git@github.com:facebookresearch/multihop_dense_retrieval.git
-cd MDR 
+cd multihop_dense_retrieval 
 pip install -r requirements.txt; python setup.py develop
 ```
 
@@ -32,8 +32,9 @@ pip install -r requirements.txt; python setup.py develop
 Simplified data files with **quesitons** and ground-truth **supporting passages**:
 
 ```
-# save pretrained models to models/ and all processed hotpotQA into data/
-./scripts/download_hotpot.sh
+# save pretrained models to models/ and all processed hotpotQA into data/ 
+# models will take about 2GB, and data will take 20GB since the pre-trained wikipedia index are included.
+bash ./scripts/download_hotpot.sh
 ```
 
 
@@ -41,7 +42,7 @@ Simplified data files with **quesitons** and ground-truth **supporting passages*
 Evalauting direct retrieval performance (The printed statistics might not adhere to the metric names defined in the paper. **PR**: whether one of the supporting passages is included in all retrieved passages; **P-EM**: whether **both** supporting passages are included in all retrieval passages; **Path Recall**: whether any of the topk retrieved chain extract match the ground-truth supporting passages.) and saving topk retrieved passage chains for downstream QA. 
 
 ```
-python scripts/eval_mhop_retrieval.py \
+python scripts/eval/eval_mhop_retrieval.py \
     data/hotpot/hotpot_qas_val.json \
     data/hotpot_index/wiki_index.npy \
     data/hotpot_index/wiki_id2doc.json \
