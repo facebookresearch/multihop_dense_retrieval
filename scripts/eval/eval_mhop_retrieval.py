@@ -183,8 +183,7 @@ if __name__ == '__main__':
 
             for idx in range(bsize):
                 search_scores = path_scores[idx]
-                ranked_pairs =
-                np.vstack(np.unravel_index(np.argsort(search_scores.ravel())[::-1],
+                ranked_pairs = np.vstack(np.unravel_index(np.argsort(search_scores.ravel())[::-1],
                                            (args.beam_size, args.beam_size))).transpose()
                 retrieved_titles = []
                 hop1_titles = []
@@ -223,6 +222,7 @@ if __name__ == '__main__':
                     if np.sum(sp_covered) == len(sp_covered):
                         p_em = 1
                     path_covered = [int(set(p) == set(sp)) for p in path_titles]
+                    path_covered = np.sum(path_covered) > 0
                     recall_1 = 0
                     covered_1 = [sp_title in hop1_titles for sp_title in sp]
                     if np.sum(covered_1) > 0: recall_1 = 1
@@ -232,6 +232,7 @@ if __name__ == '__main__':
                     "p_em": p_em,
                     "type": type_,
                     'recall_1': recall_1,
+                    'path_covered': int(path_covered)
                     })
 
 
@@ -265,13 +266,13 @@ if __name__ == '__main__':
             logger.info(f"{t} Questions num: {len(type2items[t])}")
             logger.info(f'Ans Recall: {np.mean([m["ans_recall"] for m in type2items[t]])}')
     else:
-        logger.info(f'Avg PR: {np.mean([m["p_recall"] for m in metrics])}')
-        logger.info(f'Avg P-EM: {np.mean([m["p_em"] for m in metrics])}')
-        logger.info(f'Avg 1-Recall: {np.mean([m["recall_1"] for m in metrics])}')
-        logger.info(f'Path Recall: {np.mean([m["path_covered"] for m in metrics])}')
+        logger.info(f'\tAvg PR: {np.mean([m["p_recall"] for m in metrics])}')
+        logger.info(f'\tAvg P-EM: {np.mean([m["p_em"] for m in metrics])}')
+        logger.info(f'\tAvg 1-Recall: {np.mean([m["recall_1"] for m in metrics])}')
+        logger.info(f'\tPath Recall: {np.mean([m["path_covered"] for m in metrics])}')
         for t in type2items.keys():
             logger.info(f"{t} Questions num: {len(type2items[t])}")
             logger.info(f'\tAvg PR: {np.mean([m["p_recall"] for m in type2items[t]])}')
             logger.info(f'\tAvg P-EM: {np.mean([m["p_em"] for m in type2items[t]])}')
-            logger.info(f'Avg 1-Recall: {np.mean([m["recall_1"] for m in type2items[t]])}')
-            logger.info(f'Path Recall: {np.mean([m["path_covered"] for m in type2items[t]])}')
+            logger.info(f'\tAvg 1-Recall: {np.mean([m["recall_1"] for m in type2items[t]])}')
+            logger.info(f'\tPath Recall: {np.mean([m["path_covered"] for m in type2items[t]])}')

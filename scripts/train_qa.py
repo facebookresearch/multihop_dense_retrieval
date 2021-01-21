@@ -78,7 +78,7 @@ def main():
 
     # define model
     if args.model_name == "spanbert":
-        bert_config = AutoConfig.from_pretrained("/private/home/xwhan/span-bert")
+        bert_config = AutoConfig.from_pretrained("/private/home/span-bert")
         tokenizer = AutoTokenizer.from_pretrained('bert-large-cased')
     else:
         bert_config = AutoConfig.from_pretrained(args.model_name)
@@ -365,7 +365,7 @@ def predict(args, model, eval_dataloader, logger, fixed_thresh=None):
         logger.info(f'joint f1: {np.mean(joint_f1s)}, count: {len(joint_f1s)}')
     logger.info(f"Best joint F1 from combination {best_f1}")
     if args.save_prediction != "":
-        json.dump(best_res, open(f"/private/home/xwhan/data/hotpot/results/{args.save_prediction}", "w"))
+        json.dump(best_res, open(f"{args.save_prediction}", "w"))
 
     model.train()
     return {"em": best_em, "f1": best_f1, "joint_em": best_joint_em, "joint_f1": best_joint_f1, "sp_em": best_sp_em, "sp_f1": best_sp_f1}
@@ -471,7 +471,7 @@ def eval_final(args, model, eval_dataloader, weight=0.8, gpu=True):
 
 
     if args.save_prediction != "":
-        json.dump(results, open(f"/private/home/xwhan/data/hotpot/results/{args.save_prediction}", "w"))
+        json.dump(results, open(f"{args.save_prediction}", "w"))
 
     return results
 

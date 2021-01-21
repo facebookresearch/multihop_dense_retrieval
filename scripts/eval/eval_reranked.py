@@ -5,10 +5,10 @@ from utils.basic_tokenizer import SimpleTokenizer
 from tqdm import tqdm
 
 
-corpus = json.load(open("index/hotpotQA_corpus_dict.json"))
+corpus = json.load(open("../data/hotpot_index/wiki_id2doc.json"))
 title2text = {v["title"]:v["text"] for v in corpus.values()}
 
-val_inputs = [json.loads(l) for l in open("/private/home/xwhan/data/hotpot/hotpot_qas_val.json").readlines()]
+val_inputs = [json.loads(l) for l in open("../data/hotpot/hotpot_qas_val.json").readlines()]
 id2goldsp = {_["_id"]:_["sp"] for _ in val_inputs}
 id2goldans = {_["_id"]:_["answer"] for _ in val_inputs}
 id2type = {_["_id"]:_["type"] for _ in val_inputs}
@@ -18,7 +18,7 @@ id2type = {_["_id"]:_["type"] for _ in val_inputs}
 simple_tokenizer = SimpleTokenizer()
 
 # out best results
-results = json.load(open("/private/home/xwhan/data/hotpot/results/hotpot_val_top100.json"))
+results = json.load(open("../data/hotpot/results/hotpot_val_top100.json"))
 
 # # asai results
 # results = json.load(open("/private/home/xwhan/code/learning_to_retrieve_reasoning_paths/results/hotpot_dev_reader_titles.json"))

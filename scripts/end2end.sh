@@ -12,15 +12,15 @@
 #SBATCH --open-mode=append
 
 --wrap="srun python end2end.py \
-    /private/home/xwhan/data/hotpot/hotpot_qas_val.json"
+    ../data/hotpot/hotpot_qas_val.json"
 
 
 
 sbatch --job-name=hotpot_eval \
---error=/checkpoint/xwhan/hotpot-jobs/hotpot-%j.err \
---output=/checkpoint/xwhan/hotpot-jobs/hotpot-%j.out \
+--error=/checkpoint/hotpot-jobs/hotpot-%j.err \
+--output=/checkpoint/hotpot-jobs/hotpot-%j.out \
 --partition=dev --nodes=1 --ntasks-per-node=1 \
 --cpus-per-task=16 \
 --gpus-per-node=1 --open-mode=append \
 --time=12:00:00 \
---wrap="srun python end2end.py /private/home/xwhan/data/hotpot/hotpot_qas_val.json"
+--wrap="srun python end2end.py ../data/hotpot/hotpot_qas_val.json"
