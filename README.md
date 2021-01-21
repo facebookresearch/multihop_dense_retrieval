@@ -25,7 +25,7 @@ conda create --name MDR python=3.6
 conda activate MDR
 git clone git@github.com:facebookresearch/multihop_dense_retrieval.git
 cd multihop_dense_retrieval 
-pip install -r requirements.txt; python setup.py develop
+bash setup.sh
 ```
 
 2. Download the necessary data files and pretrained retrieval models
