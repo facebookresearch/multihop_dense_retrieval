@@ -1,4 +1,5 @@
 ## Evaluating retrieval:
+```
 Evaluating 7405 samples...
 	Avg PR: 0.8428089128966915
 	Avg P-EM: 0.6592842673869007
@@ -14,3 +15,4 @@ bridge Questions num: 5918
 	Avg P-EM: 0.5866846907739101
 	Avg 1-Recall: 0.7470429199053734
 	Path Recall: 0.5866846907739101
+```
