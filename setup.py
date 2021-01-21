@@ -7,6 +7,7 @@
 
 from setuptools import setup, find_packages
 import sys
+import subprocess
 
 with open('README.md') as f:
     readme = f.read()
@@ -16,6 +17,12 @@ with open('README.md') as f:
 
 with open('requirements.txt') as f:
     reqs = f.read()
+
+process = subprocess.run(
+    ['conda install pytorch=1.5.0 torchvision cudatoolkit=10.1 -c pytorch',
+    'conda install faiss-gpu cudatoolkit=10.0 -c pytorch'])
+process
+
 
 setup(
     name='mdr',

@@ -8,7 +8,7 @@
 """
 Efficient end2end QA with HNSW index
 
-taskset --cpu-list 0-15 python end2end.py /private/home/xwhan/data/hotpot/hotpot_qas_val.json
+taskset --cpu-list 0-15 python end2end.py ../data/hotpot/hotpot_qas_val.json
 """
 import argparse
 import json

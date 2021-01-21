@@ -67,7 +67,7 @@ The best answer extraction model is based on the pretrained [ELECTRA](https://ar
 As the HotpotQA task requires evaluating the prediction of supporting sentences, we do sentence segmetation on the MDR retrieval result before feeding into the answer extraction models. Follow the script [scripts/add_sp_label.sh](scripts/add_sp_label.sh) to annotate the retrieved chains for train/val data. Supposing we got the top100 retrieved results in `data/hotpot/dev_retrieval_top100_sp.json`: 
 
 ```
-python train_qa.py \
+python scripts/train_qa.py \
     --do_predict \
     --predict_batch_size 200 \
     --model_name google/electra-large-discriminator \
