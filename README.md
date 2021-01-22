@@ -6,7 +6,7 @@
 
 `MDR` is a simple and generalized dense retrieval method which recursively retrieves supporting text passages for answering complex open-domain questions. The repo provides code and pretrained retrieval models that produce **state-of-the-art** retrieval performance on two multi-hop QA datasets (the [HotpotQA](https://hotpotqa.github.io) dataset and the multi-hop subset of the [FEVER fact extraction and verification dataset](https://fever.ai)). 
 
-More details about our approach are described in the our ICLR paper [Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)
+More details about our approach are described in our ICLR paper [Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)
 
 
 - [Use the trained models](#use-the-trained-models)
@@ -227,7 +227,7 @@ Processed (ran [scripts/add_sp_label.sh](scripts/add_sp_label.sh)) train/validat
 * `${QA_TRAIN_DATA}`: data/hotpot/train_retrieval_b100_k100_sp.json
 * `${QA_DEV_DATA}`: data/hotpot/dev_retrieval_b50_k50_sp.json
 
-REFERENCE
+## REFERENCE
 ```
 @article{xiong2020answering,
   title={Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval},
