@@ -119,24 +119,10 @@ def mhop_loss(model, batch, args):
     all_ctx = torch.cat([outputs['c1'], outputs['c2']], dim=0)
     neg_ctx = torch.cat([outputs["neg_1"].unsqueeze(1), outputs["neg_2"].unsqueeze(1)], dim=1) # B x 2 x M x h
     
-    if args.multi_vector > 1:
-        # all_ctx 2|B| x M x h 
-        bsize = outputs["q"].size(0)
-        scores_1_hop = outputs["q"].mm(all_ctx.view(-1, all_ctx.size(-1)).t()).view(bsize, 2*bsize, args.multi_vector).max(2)[0]
-        scores_2_hop = outputs["q_sp1"].mm(all_ctx.view(-1, all_ctx.size(-1)).t()).view(bsize, 2*bsize, args.multi_vector).max(2)[0]
-        neg_scores_1 = (outputs["q"].view(bsize, 1, 1, -1) * neg_ctx).sum(3).max(2)[0]
-        neg_scores_2 = (outputs["q_sp1"].view(bsize, 1, 1, -1) * neg_ctx).sum(3).max(2)[0]
-    else:
-        scores_1_hop = torch.mm(outputs["q"], all_ctx.t())
-        neg_scores_1 = torch.bmm(outputs["q"].unsqueeze(1), neg_ctx.transpose(1,2)).squeeze(1)
-        scores_2_hop = torch.mm(outputs["q_sp1"], all_ctx.t())
-        neg_scores_2 = torch.bmm(outputs["q_sp1"].unsqueeze(1), neg_ctx.transpose(1,2)).squeeze(1)
-
-    # # temperature before softmax
-    # scores_1_hop = scores_1_hop / args.temperature
-    # scores_2_hop = scores_2_hop / args.temperature    
-    # neg_scores_1 = neg_scores_1 / args.temperature
-    # neg_scores_2 = neg_scores_2 / args.temperature  
+    scores_1_hop = torch.mm(outputs["q"], all_ctx.t())
+    neg_scores_1 = torch.bmm(outputs["q"].unsqueeze(1), neg_ctx.transpose(1,2)).squeeze(1)
+    scores_2_hop = torch.mm(outputs["q_sp1"], all_ctx.t())
+    neg_scores_2 = torch.bmm(outputs["q_sp1"].unsqueeze(1), neg_ctx.transpose(1,2)).squeeze(1)
 
     # mask the 1st hop
     bsize = outputs["q"].size(0)
@@ -168,18 +154,11 @@ def mhop_eval(outputs, args):
     all_ctx = torch.cat([outputs['c1'], outputs['c2']], dim=0)
     neg_ctx = torch.cat([outputs["neg_1"].unsqueeze(1), outputs["neg_2"].unsqueeze(1)], dim=1)
 
-    if args.multi_vector > 1:
-        # all_ctx 2|B| x M x h 
-        bsize = outputs["q"].size(0)
-        scores_1_hop = outputs["q"].mm(all_ctx.view(-1, all_ctx.size(-1)).t()).view(bsize, 2*bsize, args.multi_vector).max(2)[0]
-        scores_2_hop = outputs["q_sp1"].mm(all_ctx.view(-1, all_ctx.size(-1)).t()).view(bsize, 2*bsize, args.multi_vector).max(2)[0]
-        neg_scores_1 = (outputs["q"].view(bsize, 1, 1, -1) * neg_ctx).sum(3).max(2)[0]
-        neg_scores_2 = (outputs["q_sp1"].view(bsize, 1, 1, -1) * neg_ctx).sum(3).max(2)[0]
-    else:
-        scores_1_hop = torch.mm(outputs["q"], all_ctx.t())
-        neg_scores_1 = torch.bmm(outputs["q"].unsqueeze(1), neg_ctx.transpose(1,2)).squeeze(1)
-        scores_2_hop = torch.mm(outputs["q_sp1"], all_ctx.t())
-        neg_scores_2 = torch.bmm(outputs["q_sp1"].unsqueeze(1), neg_ctx.transpose(1,2)).squeeze(1)
+
+    scores_1_hop = torch.mm(outputs["q"], all_ctx.t())
+    neg_scores_1 = torch.bmm(outputs["q"].unsqueeze(1), neg_ctx.transpose(1,2)).squeeze(1)
+    scores_2_hop = torch.mm(outputs["q_sp1"], all_ctx.t())
+    neg_scores_2 = torch.bmm(outputs["q_sp1"].unsqueeze(1), neg_ctx.transpose(1,2)).squeeze(1)
 
 
     bsize = outputs["q"].size(0)
