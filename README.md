@@ -8,7 +8,7 @@
 
 More details about our approach are described in our ICLR paper [Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)
 
-<p align="center"><img width="85%" src="imgs/overview.pdf" /></p>
+<p align="center"><img width="85%" src="imgs/overview.png" /></p>
 
 
 
