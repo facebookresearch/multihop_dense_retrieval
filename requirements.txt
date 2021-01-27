@@ -3,3 +3,5 @@ tensorboard==1.14.0
 numpy
 tqdm
 ujson
+faiss-gpu
+pytorch=1.4.0

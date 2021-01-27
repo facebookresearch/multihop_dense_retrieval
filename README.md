@@ -8,6 +8,9 @@
 
 More details about our approach are described in our ICLR paper [Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)
 
+<p align="center"><img width="85%" src="imgs/overview.pdf" /></p>
+
+
 
 - [Use the trained models](#use-the-trained-models)
     - [Evaluating retrieval](#evaluating-retrieval)
@@ -231,9 +234,9 @@ Processed (ran [scripts/add_sp_label.sh](scripts/add_sp_label.sh)) train/validat
 ```
 @article{xiong2020answering,
   title={Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval},
-  author={Xiong, Wenhan and Li, Xiang Lorraine and Iyer, Srini and Du, Jingfei and Lewis, Patrick and Wang, William Yang and Mehdad, Yashar and Yih, Wen-tau and Riedel, Sebastian and Kiela, Douwe and others},
-  journal={arXiv preprint arXiv:2009.12756},
-  year={2020}
+  author={Xiong, Wenhan and Li, Xiang Lorraine and Iyer, Srinivasan and Du, Jingfei and Lewis, Patrick and Wang, William Yang and Mehdad, Yashar and Yih, Wen-tau and Riedel, Sebastian and Kiela, Douwe and O{\u{g}}uz, Barlas},
+  journal={International Conference on Learning Representations},
+  year={2021}
 }
 ```
 

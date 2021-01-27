@@ -1,2 +1,4 @@
 logs/
+.DS_Store
+*.pyc
 *.swp
