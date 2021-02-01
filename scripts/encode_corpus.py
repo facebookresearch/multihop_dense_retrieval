@@ -9,7 +9,7 @@ Description: encode text corpus into a store of dense vectors.
 
 Usage (adjust the batch size according to your GPU memory):
 
-CUDA_VISIBLE_DEVICES=0,1,2,3 python scripts/get_embed.py \
+CUDA_VISIBLE_DEVICES=0,1,2,3 python scripts/encode_corpus.py \
     --do_predict \
     --predict_batch_size 1000 \
     --model_name roberta-base \

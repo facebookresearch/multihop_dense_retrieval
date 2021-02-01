@@ -186,7 +186,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python train_momentum.py \
 
 ## Encoding the corpus for retrieval
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 python scripts/get_embed.py \
+CUDA_VISIBLE_DEVICES=0,1,2,3 python scripts/encode_corpus.py \
     --do_predict \
     --predict_batch_size 1000 \
     --model_name roberta-base \
