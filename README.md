@@ -197,7 +197,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python scripts/encode_corpus.py \
     --max_c_len 300 \
     --num_workers 20 
 ```
-* `${CORPUS_PATH}`: json encoded object ({"title": ..., "text": ...}) per line;
+* `${CORPUS_PATH}`: each line of this file should be an json encoded object ({"title": str, "text": str}). For HotpotQA, check the authors' guide to get the processed Wikipedia corpus (abstract only).
 * `${SAVE_PATH}`: path to save the numpy vectors and ID2DOC lookup table.
 
 ### ELECTRA QA model training
