@@ -45,7 +45,7 @@ class EmDataset(Dataset):
         self.max_c_len = max_c_len
 
         if not os.path.exists(save_path):
-            os.makedir(save_path)
+            os.mkdir(save_path)
         save_path = os.path.join(save_path, "id2doc.json") # ID to doc mapping
 
         print(f"Loading data from {data_path}")

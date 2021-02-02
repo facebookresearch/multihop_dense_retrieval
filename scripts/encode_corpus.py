@@ -66,7 +66,7 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
 
     eval_dataset = EmDataset(
-        tokenizer, args.predict_file, args.max_q_len, args.max_c_len, args.is_query_embed)
+        tokenizer, args.predict_file, args.max_q_len, args.max_c_len, args.is_query_embed, args.embed_save_path)
     eval_dataloader = DataLoader(
         eval_dataset, batch_size=args.predict_batch_size, collate_fn=em_collate, pin_memory=True, num_workers=args.num_workers)
 
