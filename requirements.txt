@@ -4,4 +4,4 @@ numpy
 tqdm
 ujson
 faiss-gpu
-pytorch=1.4.0
+torch==1.4.0
