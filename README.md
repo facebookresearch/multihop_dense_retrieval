@@ -15,11 +15,12 @@ More details about our approach are described in our ICLR paper [Answering Compl
 - [Use the trained models](#use-the-trained-models)
     - [Evaluating retrieval](#evaluating-retrieval)
     - [Evaluating QA](#evaluating-qa)
+    - [Demo](#end-to-end-demo)
 - [Train models from scratch](#train-models-from-scratch)
     - [Retriever training](#retriever-training)
     - [Encoding the corpus for retrieval](#encoding-the-corpus-for-retrieval)
     - [ELECTRA QA model training](#electra-qa-model-training)
-- [Demo]
+
 
 ## Use the trained models
 
@@ -128,7 +129,7 @@ Expected results:
 01/21/2021 17:01:51 - INFO - __main__ - test performance {'em': 0.6233625928426739, 'f1': 0.7504594111976622, 'joint_em': 0.42052667116812964, 'joint_f1': 0.6631669237532106, 'sp_em': 0.5654287643484133, 'sp_f1': 0.7942837708469039}
 ```
 
-## Demo
+## End to end Demo
 A simple demo code using our pretrained models.
 ```
 streamlit run scripts/demo.py
