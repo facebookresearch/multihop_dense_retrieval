@@ -1,7 +1,6 @@
 transformers==2.11.0
-tensorboard==1.14.0
+tensorboard>=1.15.0
 numpy
 tqdm
 ujson
-faiss-gpu
-torch==1.4.0
+streamlit

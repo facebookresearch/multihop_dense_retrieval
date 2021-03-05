@@ -32,8 +32,8 @@ from retrieval.models.mhop_retriever import RobertaRetriever
 from retrieval.utils.utils import load_saved
 
 from qa.qa_model import QAModel
-from qa.qa_dataset import qa_collate, QAEvalDataset
-from train_qa import eval_final
+from mdr.qa.qa_dataset import qa_collate, QAEvalDataset
+from .train_qa import eval_final
 from qa.hotpot_evaluate_v1 import f1_score, exact_match_score
 from qa.utils import set_global_logging_level
 
@@ -165,9 +165,6 @@ if __name__ == '__main__':
                     "candidate_chains": chains
                 })
 
-    print(np.mean(search_times))
-    print(np.mean(encode_times))
-    # import pdb; pdb.set_trace()
 
     logger.info("Reading...")
     collate_fc = partial(qa_collate, pad_id=qa_tokenizer.pad_token_id)

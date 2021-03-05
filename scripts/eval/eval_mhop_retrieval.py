@@ -76,6 +76,19 @@ if __name__ == '__main__':
     if args.only_eval_ans:
         ds_items = [_ for _ in ds_items if _["answer"][0] not in ["yes", "no"]]
 
+    logger.info("Loading trained model...")
+    bert_config = AutoConfig.from_pretrained(args.model_name)
+    tokenizer = AutoTokenizer.from_pretrained(args.model_name)
+    model = RobertaRetriever(bert_config, args)
+    model = load_saved(model, args.model_path, exact=False)
+    simple_tokenizer = SimpleTokenizer()
+
+    cuda = torch.device('cuda')
+    model.to(cuda)
+    from apex import amp
+    model = amp.initialize(model, opt_level='O1')
+    model.eval()
+
     logger.info("Building index...")
     d = 768
     xb = np.load(args.indexpath).astype('float32')
@@ -109,7 +122,7 @@ if __name__ == '__main__':
         index.add(xb)
         if args.gpu:
             res = faiss.StandardGpuResources()
-            index = faiss.index_cpu_to_gpu(res, 1, index)
+            index = faiss.index_cpu_to_gpu(res, 6, index)
 
     if args.save_index:
         faiss.write_index(index, "data/hotpot_index/wiki_index_hnsw_roberta")
@@ -121,18 +134,6 @@ if __name__ == '__main__':
     # title2text = {v[0]:v[1] for v in id2doc.values()}
     logger.info(f"Corpus size {len(id2doc)}")
     
-    logger.info("Loading trained model...")
-    bert_config = AutoConfig.from_pretrained(args.model_name)
-    tokenizer = AutoTokenizer.from_pretrained(args.model_name)
-    model = RobertaRetriever(bert_config, args)
-    model = load_saved(model, args.model_path, exact=False)
-    simple_tokenizer = SimpleTokenizer()
-
-    cuda = torch.device('cuda')
-    model.to(cuda)
-    from apex import amp
-    model = amp.initialize(model, opt_level='O1')
-    model.eval()
 
     logger.info("Encoding questions and searching")
     questions = [_["question"][:-1] if _["question"].endswith("?") else _["question"] for _ in ds_items]

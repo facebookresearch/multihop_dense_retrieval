@@ -11,6 +11,8 @@ More details about our approach are described in our ICLR paper [Answering Compl
 <p align="center"><img width="85%" src="imgs/overview.png" /></p>
 
 
+**\*\*\*\*\* Update 3/4/2021: Adding simple demo code based on [streamlit](https://streamlit.io/) \*\*\*\*\***
+
 
 - [Use the trained models](#use-the-trained-models)
     - [Evaluating retrieval](#evaluating-retrieval)
@@ -19,6 +21,7 @@ More details about our approach are described in our ICLR paper [Answering Compl
     - [Retriever training](#retriever-training)
     - [Encoding the corpus for retrieval](#encoding-the-corpus-for-retrieval)
     - [ELECTRA QA model training](#electra-qa-model-training)
+- [Demo]
 
 ## Use the trained models
 
@@ -127,6 +130,14 @@ Expected results:
 01/21/2021 17:01:51 - INFO - __main__ - test performance {'em': 0.6233625928426739, 'f1': 0.7504594111976622, 'joint_em': 0.42052667116812964, 'joint_f1': 0.6631669237532106, 'sp_em': 0.5654287643484133, 'sp_f1': 0.7942837708469039}
 ```
 
+## Demo
+A simple demo code using our pretrained models.
+```
+streamlit run scripts/demo.py
+```
+
+<p align="center"><img width="85%" src="imgs/demo.png" /></p>
+
 
 ## Train models from scratch
 Our experiments are mostly run on 8 GPUs, however, we observed similar performance when using a smaller performance. 
@@ -230,7 +241,7 @@ Processed (ran [scripts/add_sp_label.sh](scripts/add_sp_label.sh)) train/validat
 * `${QA_TRAIN_DATA}`: data/hotpot/train_retrieval_b100_k100_sp.json
 * `${QA_DEV_DATA}`: data/hotpot/dev_retrieval_b50_k50_sp.json
 
-## REFERENCE
+## Cite
 ```
 @article{xiong2020answering,
   title={Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval},
@@ -240,5 +251,5 @@ Processed (ran [scripts/add_sp_label.sh](scripts/add_sp_label.sh)) train/validat
 }
 ```
 
-## LICENSE
+## License
 CC-BY-NC 4.0
