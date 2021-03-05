@@ -4,15 +4,13 @@
 
 # [<p align=center>Multi-Hop Dense Text Retrieval (`MDR`)</p>](#p-aligncentermulti-hop-dense-text-retrieval-mdrp)
 
+**\*\*\*\*\* Update 3/4/2021: Adding simple demo code based on [streamlit](https://streamlit.io/) \*\*\*\*\***
+
 `MDR` is a simple and generalized dense retrieval method which recursively retrieves supporting text passages for answering complex open-domain questions. The repo provides code and pretrained retrieval models that produce **state-of-the-art** retrieval performance on two multi-hop QA datasets (the [HotpotQA](https://hotpotqa.github.io) dataset and the multi-hop subset of the [FEVER fact extraction and verification dataset](https://fever.ai)). 
 
 More details about our approach are described in our ICLR paper [Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)
 
 <p align="center"><img width="85%" src="imgs/overview.png" /></p>
-
-
-**\*\*\*\*\* Update 3/4/2021: Adding simple demo code based on [streamlit](https://streamlit.io/) \*\*\*\*\***
-
 
 - [Use the trained models](#use-the-trained-models)
     - [Evaluating retrieval](#evaluating-retrieval)
