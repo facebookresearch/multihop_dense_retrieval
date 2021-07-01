@@ -132,8 +132,8 @@ def mhop_loss(model, batch, args):
     scores_2_hop = torch.cat([scores_2_hop, neg_scores_2], dim=1)
 
     if args.momentum:
-        queue_neg_scores_1 = torch.mm(outputs["q"], model.module.queue.clone().detach().t())
-        queue_neg_scores_2 = torch.mm(outputs["q_sp1"], model.module.queue.clone().detach().t())
+        queue_neg_scores_1 = torch.mm(outputs["q"], model.queue.clone().detach().t())
+        queue_neg_scores_2 = torch.mm(outputs["q_sp1"], model.queue.clone().detach().t())
 
         # queue_neg_scores_1 = queue_neg_scores_1 / args.temperature
         # queue_neg_scores_2 = queue_neg_scores_2 / args.temperature  

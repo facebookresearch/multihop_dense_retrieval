@@ -183,9 +183,9 @@ def main():
                         if best_mrr < mrr:
                             logger.info("Saving model with best MRR %.2f -> MRR %.2f on epoch=%d" %
                                         (best_mrr*100, mrr*100, epoch))
-                            torch.save(model.module.encoder_q.state_dict(), os.path.join(
+                            torch.save(model.encoder_q.state_dict(), os.path.join(
                                 args.output_dir, f"checkpoint_q_best.pt"))
-                            torch.save(model.module.encoder_q.state_dict(), os.path.join(
+                            torch.save(model.encoder_q.state_dict(), os.path.join(
                                 args.output_dir, f"checkpoint_k_best.pt"))
                             model = model.to(device)
                             best_mrr = mrr
@@ -199,9 +199,9 @@ def main():
 
             if best_mrr < mrr:
                 logger.info("Saving model with best MRR %.2f -> MRR %.2f on epoch=%d" % (best_mrr*100, mrr*100, epoch))
-                torch.save(model.module.encoder_q.state_dict(), os.path.join(
+                torch.save(model.encoder_q.state_dict(), os.path.join(
                     args.output_dir, f"checkpoint_q_best.pt"))
-                torch.save(model.module.encoder_q.state_dict(), os.path.join(
+                torch.save(model.encoder_q.state_dict(), os.path.join(
                     args.output_dir, f"checkpoint_k_best.pt"))
                 best_mrr = mrr
 
