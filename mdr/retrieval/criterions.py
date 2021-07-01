@@ -140,7 +140,7 @@ def mhop_loss(model, batch, args):
 
         scores_1_hop = torch.cat([scores_1_hop, queue_neg_scores_1], dim=1)
         scores_2_hop = torch.cat([scores_2_hop, queue_neg_scores_2], dim=1)
-        model.module.dequeue_and_enqueue(all_ctx.detach())
+        model.dequeue_and_enqueue(all_ctx.detach())
         # model.module.momentum_update_key_encoder()
 
     target_1_hop = torch.arange(outputs["q"].size(0)).to(outputs["q"].device)
