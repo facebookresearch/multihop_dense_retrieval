@@ -47,7 +47,7 @@ from transformers import (AdamW, AutoConfig, AutoTokenizer,
 from mdr.retrieval.config import train_args
 from mdr.retrieval.criterions import (mhop_eval, mhop_loss)
 from mdr.retrieval.data.mhop_dataset import MhopDataset, mhop_collate
-from mdr.retrieval.models.mhop_retriever import (MhopRetriever, RobertaRetriever)
+from mdr.retrieval.models.mhop_retriever import RobertaRetriever
 from mdr.retrieval.utils.utils import AverageMeter, move_to_cuda, load_saved
 
 
@@ -99,14 +99,7 @@ def main():
 
     bert_config = AutoConfig.from_pretrained(args.model_name)
 
-    if "roberta" in args.model_name:
-        model = RobertaRetriever(bert_config, args)
-    else:
-        if args.multi_vector > 1:
-            logger.info(f"Use multi vector encoder...")
-            model = MhopRetrieverMultiVector(bert_config, args)
-        else:
-            model = MhopRetriever(bert_config, args)
+    model = RobertaRetriever(bert_config, args)
 
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
     collate_fc = partial(mhop_collate, pad_id=tokenizer.pad_token_id)
