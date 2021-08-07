@@ -132,15 +132,23 @@ def mhop_loss(model, batch, args):
     scores_2_hop = torch.cat([scores_2_hop, neg_scores_2], dim=1)
 
     if args.momentum:
-        queue_neg_scores_1 = torch.mm(outputs["q"], model.queue.clone().detach().t())
-        queue_neg_scores_2 = torch.mm(outputs["q_sp1"], model.queue.clone().detach().t())
+
+        n_gpu = torch.cuda.device_count()
+        if n_gpu > 1:
+            # Using DataParallel, so need to call model.modue
+            mdl = model.module
+        else:
+            mdl = model
+
+        queue_neg_scores_1 = torch.mm(outputs["q"], mdl.queue.clone().detach().t())
+        queue_neg_scores_2 = torch.mm(outputs["q_sp1"], mdl.queue.clone().detach().t())
 
         # queue_neg_scores_1 = queue_neg_scores_1 / args.temperature
         # queue_neg_scores_2 = queue_neg_scores_2 / args.temperature  
 
         scores_1_hop = torch.cat([scores_1_hop, queue_neg_scores_1], dim=1)
         scores_2_hop = torch.cat([scores_2_hop, queue_neg_scores_2], dim=1)
-        model.dequeue_and_enqueue(all_ctx.detach())
+        mdl.dequeue_and_enqueue(all_ctx.detach())
         # model.module.momentum_update_key_encoder()
 
     target_1_hop = torch.arange(outputs["q"].size(0)).to(outputs["q"].device)
